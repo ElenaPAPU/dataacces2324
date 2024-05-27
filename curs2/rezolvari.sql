@@ -104,7 +104,24 @@ SELECT *, (bursa) * 12 AS bursa_anuala FROM `student` WHERE bursa * 12>4000;
 
 
 
+-- Aplicatia 6
+--1.Listati studentii alfabetic dupa nume crescator si descrescator. 
+SELECT * FROM `student` ORDER BY nume ASC, prenume DESC;
 
+--2.Afisati profesorii in ordine aleatoare (random)
+SELECT * FROM `profesor` ORDER BY rand();
+
+--3.Pentru a lua random un castigator dintr-un concurs
+SELECT nume, prenume FROM `profesor` ORDER BY rand() LIMIT 1;
+
+--4.Listati alfabetic primi 5 studenti cei mai tineri
+SELECT * FROM `student` ORDER BY data_nastere DESC LIMIT 5;
+
+--4.Listati alfabetic urmatorii 5 studenti cei mai tineri
+SELECT * FROM `student` ORDER BY data_nastere DESC LIMIT 5,5;
+
+--5.Listati nr.studentilor din fiecare an (o singura interogare GROUP BY) cu conditia sa fie mai multi de 9 studenti in fiecare an.
+SELECT *, COUNT(id) AS nr FROM `student` GROUP BY an HAVING nr >9;
 
 
 
