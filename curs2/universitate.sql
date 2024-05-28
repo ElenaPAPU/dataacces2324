@@ -119,3 +119,8 @@ SELECT * FROM `student` WHERE YEAR(data_nastere) >='1996';
 
 SELECT * FROM `student` WHERE YEAR(data_nastere) >='1993' AND YEAR (data_nastere) <='1994'; sau
 SELECT * FROM `student` WHERE YEAR(data_nastere) BETWEEN '1993' AND '1994';
+
+
+
+
+

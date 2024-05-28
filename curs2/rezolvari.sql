@@ -104,6 +104,7 @@ SELECT *, (bursa) * 12 AS bursa_anuala FROM `student` WHERE bursa * 12>4000;
 
 
 
+
 -- Aplicatia 6
 --1.Listati studentii alfabetic dupa nume crescator si descrescator. 
 SELECT * FROM `student` ORDER BY nume ASC, prenume DESC;
@@ -120,9 +121,50 @@ SELECT * FROM `student` ORDER BY data_nastere DESC LIMIT 5;
 --4.Listati alfabetic urmatorii 5 studenti cei mai tineri
 SELECT * FROM `student` ORDER BY data_nastere DESC LIMIT 5,5;
 
---5.Listati nr.studentilor din fiecare an (o singura interogare GROUP BY) cu conditia sa fie mai multi de 9 studenti in fiecare an.
+--Aplicatia 7
+--Listati nr.studentilor din fiecare an (o singura interogare GROUP BY) cu conditia sa fie mai multi de 9 studenti in fiecare an.
 SELECT *, COUNT(id) AS nr FROM `student` GROUP BY an HAVING nr >9;
 
+-- Tabelul voluntariat. Comenzi folosind JOIN
+INSERT INTO `voluntariat` (`id`, `id_student`, `nume_program`) VALUES (NULL, '100', 'Demo1'), (NULL, '101', 'Demo2');
+
+--1.Informatia comuna din doua tabele
+SELECT s.nume, s.prenume, v.nume_program FROM student AS s INNER JOIN voluntariat AS v ON s.id = v.id_student; 
+
+--2.Informatiile din tabelul A cat si cele comune cu tabelul B (Tot din A + comunele din B)
+SELECT FROM A LEFT JOIN B ON A.key = B.key;
+
+--3.Informatiile din A care nu sunt si in B
+SELECT FROM A LEFT JOIN B ON A.key=B.key WHERE B.key IS NULL;
+
+--4.Informatiile din B + cele comune cu A
+SELECT FROM A RIGHT JOIN B ON A.key=B.key;
+
+--5.Informatiile din B fara cele comune cu A
+SELECT FROM A RIGHT JOIN B ON A.key=B.key WHERE B.key IS NULL;
+
+--6.Toate informatiile din A si din B
+SELECT FROM A FULL JOIN B ON A.key=B.key;
+
+--7.Toate informatiile din A si B mai putin cele comune
+SELECT FROM A FULL JOIN B ON A.key=B.key WHERE A.key IS NULL OR B.key IS NULL;
+
+
+
+--Aplicatia 8 ---NATURAL JOIN cheia primara + cheia externa trebuie sa fie denumite la fel (ex:id_curs si id_curs)
+SELECT c.id_curs, c.titlu_curs, n.valoare FROM `cursuri` c NATURAL JOIN note n;
+
+--De evitat comenzile de mai jos face produs cartezian
+SELECT * FROM student CROSS JOIN note;
+SELECT * FROM student JOIN note;
+SELECT * FROM student INNER JOIN note;
+SELECT * FROM student, note;
+
+--Pentru a vedea cursurile care au note
+SELECT * FROM cursuri c INNER JOIN note n ON c.id_curs=n.id_curs;
+
+--Aplicatia 9
+--1.Ce note a pus un anumit profesor la un anumit curs
 
 
 
